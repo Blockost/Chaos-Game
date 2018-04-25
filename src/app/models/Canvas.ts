@@ -3,14 +3,15 @@ import { Point } from './Point';
 export class Canvas {
     private readonly WIDTH = 2;
     private readonly HEIGHT = 2;
-    private readonly ratio = 1 / 2;
+    private readonly ratio = 0.6;
 
-    private ctx: CanvasRenderingContext2D;
     private start: Point;
     private points: Point[];
 
-    constructor(ctx: CanvasRenderingContext2D) {
-        this.ctx = ctx;
+    constructor(
+        private ctx: CanvasRenderingContext2D,
+        private width: number,
+        private height: number) {
         this.points = [];
     }
 
@@ -33,10 +34,14 @@ export class Canvas {
     }
 
     moveStart() {
-        const index = Math.floor(Math.random() * 3);
+        const index = Math.floor(Math.random() * this.points.length);
         const point = this.points[index];
         this.start.addX(Math.round(point.x - this.start.x) * this.ratio);
         this.start.addY(Math.round(point.y - this.start.y) * this.ratio);
         this.ctx.fillRect(this.start.x, this.start.y, this.WIDTH, this.HEIGHT);
+    }
+
+    clear() {
+        this.ctx.clearRect(0, 0, this.width, this.height);
     }
 }
