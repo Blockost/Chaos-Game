@@ -1,4 +1,4 @@
-import { Point } from "./Point";
+import { Point } from './Point';
 
 export class Polygon {
 
@@ -6,11 +6,11 @@ export class Polygon {
 
     constructor(private sides: number) {
         for (let i = sides; i > 0; i--) {
-            let angle = 360 / sides * i - 90
-            let radians = angle * Math.PI / 180
+            const angle = 360 / sides * i - 90;
+            const radians = angle * Math.PI / 180;
             this.points.push(new Point(
-                Math.cos(radians) * 100 + 200,
-                Math.sin(radians) * 100 + 200));
+                Math.cos(radians) * 150 + 200,
+                Math.sin(radians) * 150 + 200));
         }
     }
-} 
+}

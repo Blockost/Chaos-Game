@@ -10,7 +10,7 @@ import { Polygon } from './models/Polygon';
 })
 export class AppComponent implements OnInit {
 
-  //TODO 2018-04-25 find a way to retrieve DOM element's with and height
+  // TODO: 2018-04-25 find a way to retrieve DOM element's with and height
   private readonly WIDTH = 500;
   private readonly HEIGHT = 500;
 
@@ -25,9 +25,9 @@ export class AppComponent implements OnInit {
       this.WIDTH,
       this.HEIGHT);
 
-    let polygon = new Polygon(4);
+    const polygon = new Polygon(5);
 
-    for (let point of polygon.points) {
+    for (const point of polygon.points) {
       this.canvas.addPoint(point);
     }
 

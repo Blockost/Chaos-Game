@@ -6,6 +6,7 @@ export class Canvas {
     private readonly ratio = 0.6;
 
     private start: Point;
+    private lastPoint: Point;
     private points: Point[];
 
     constructor(
@@ -34,8 +35,7 @@ export class Canvas {
     }
 
     moveStart() {
-        const index = Math.floor(Math.random() * this.points.length);
-        const point = this.points[index];
+        const point = this.getRandomPoint();
         this.start.addX(Math.round(point.x - this.start.x) * this.ratio);
         this.start.addY(Math.round(point.y - this.start.y) * this.ratio);
         this.ctx.fillRect(this.start.x, this.start.y, this.WIDTH, this.HEIGHT);
@@ -44,4 +44,16 @@ export class Canvas {
     clear() {
         this.ctx.clearRect(0, 0, this.width, this.height);
     }
+
+    getRandomPoint(): Point {
+        let randomPoint;
+        do {
+            const index = Math.floor(Math.random() * this.points.length);
+            randomPoint = this.points[index];
+        } while (this.lastPoint === randomPoint);
+
+        this.lastPoint = randomPoint;
+        return randomPoint;
+    }
+
 }
