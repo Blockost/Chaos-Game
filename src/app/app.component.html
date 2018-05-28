@@ -1,1 +1,10 @@
-<canvas #canvas id="canvas" width="500" height="500" style="border:1px solid #000000;"></canvas>
+<div class="container">
+  <canvas #canvas id="canvas" width="500" height="500" style="border:1px solid #000000;"></canvas>
+  <select (change)="onPolygonChange($event.target.value)">
+    <option selected value="3">Triangle</option>
+    <option value="4">Square</option>
+    <option value="5">Pentagon</option>
+  </select>
+  <input type="range" min="0" max="1" step="0.1" (input)="onRatioChange($event.target.value)">
+  <input type="range" min="3" max="10" step="1" (input)="onPolygonChange($event.target.value)">
+</div>

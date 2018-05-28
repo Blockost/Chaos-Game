@@ -1,9 +1,10 @@
 import { Point } from './Point';
+import { Polygon } from './Polygon';
 
 export class Canvas {
-    private readonly WIDTH = 2;
-    private readonly HEIGHT = 2;
-    private readonly ratio = 0.6;
+    private readonly WIDTH = 1;
+    private readonly HEIGHT = 1;
+    private _ratio = 0.5;
 
     private start: Point;
     private lastPoint: Point;
@@ -14,10 +15,25 @@ export class Canvas {
         private width: number,
         private height: number) {
         this.points = [];
+        const polygon = new Polygon(3);
+
+        for (const point of polygon.points) {
+            this.addPoint(point);
+        }
     }
 
-    getContext(): CanvasRenderingContext2D {
+    get context(): CanvasRenderingContext2D {
         return this.ctx;
+    }
+
+    set ratio(ratio: number) {
+        this._ratio = ratio;
+    }
+
+    set vertices(numberOfVertices: number) {
+        const poly = new Polygon(numberOfVertices);
+        this.points = [];
+        this.points.push(...poly.points);
     }
 
     addPoint(point: Point) {
@@ -36,8 +52,8 @@ export class Canvas {
 
     moveStart() {
         const point = this.getRandomPoint();
-        this.start.addX(Math.round(point.x - this.start.x) * this.ratio);
-        this.start.addY(Math.round(point.y - this.start.y) * this.ratio);
+        this.start.addX(Math.round(point.x - this.start.x) * this._ratio);
+        this.start.addY(Math.round(point.y - this.start.y) * this._ratio);
         this.ctx.fillRect(this.start.x, this.start.y, this.WIDTH, this.HEIGHT);
     }
 

@@ -25,19 +25,29 @@ export class AppComponent implements OnInit {
       this.WIDTH,
       this.HEIGHT);
 
-    const polygon = new Polygon(5);
-
-    for (const point of polygon.points) {
-      this.canvas.addPoint(point);
-    }
-
     this.canvas.addStart(new Point());
 
-    for (let i = 0; i < 10000; i++) {
-      setTimeout(() => {
-        this.canvas.moveStart();
-      });
-    }
+    this.draw();
+  }
 
+  onRatioChange(ratio: number) {
+    this.canvas.ratio = ratio;
+    this.redraw();
+  }
+
+  onPolygonChange(numberOfvertices: number) {
+    this.canvas.vertices = numberOfvertices;
+    this.redraw();
+  }
+
+  draw() {
+    for (let i = 0; i < 20000; i++) {
+      this.canvas.moveStart();
+    }
+  }
+
+  redraw() {
+    this.canvas.clear();
+    this.draw();
   }
 }
